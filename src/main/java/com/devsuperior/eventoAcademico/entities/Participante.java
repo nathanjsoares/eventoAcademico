@@ -2,6 +2,9 @@ package com.devsuperior.eventoAcademico.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_participante")
 public class Participante {
@@ -13,6 +16,9 @@ public class Participante {
 
     @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "participante")
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Participante(){
     }
@@ -45,5 +51,9 @@ public class Participante {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
     }
 }

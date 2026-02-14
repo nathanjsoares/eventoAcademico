@@ -12,13 +12,27 @@ public class Atividade {
     private String descricao;
     private double preco;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "participante_id")
+    private Participante participante;
+
+    @OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)
+    private Bloco bloco;
+
     public Atividade(){
     }
 
-    public Atividade(int id, String descricao, double preco) {
+    public Atividade(int id, String descricao, double preco, Categoria categoria, Participante participante, Bloco bloco) {
         this.id = id;
         this.descricao = descricao;
         this.preco = preco;
+        this.categoria = categoria;
+        this.participante = participante;
+        this.bloco = bloco;
     }
 
     public int getId() {
@@ -43,5 +57,29 @@ public class Atividade {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Participante getParticipante() {
+        return participante;
+    }
+
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
+    }
+
+    public Bloco getBloco() {
+        return bloco;
+    }
+
+    public void setBloco(Bloco bloco) {
+        this.bloco = bloco;
     }
 }

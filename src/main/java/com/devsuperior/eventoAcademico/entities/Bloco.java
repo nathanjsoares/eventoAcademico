@@ -16,13 +16,18 @@ public class Bloco {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant fim;
 
+    @OneToOne
+    @MapsId
+    private Atividade atividade;
+
     public Bloco(){
     }
 
-    public Bloco(int id, Instant inicio, Instant fim) {
+    public Bloco(int id, Instant inicio, Instant fim, Atividade atividade) {
         this.id = id;
         this.inicio = inicio;
         this.fim = fim;
+        this.atividade = atividade;
     }
 
     public int getId() {
@@ -47,5 +52,13 @@ public class Bloco {
 
     public void setFim(Instant fim) {
         this.fim = fim;
+    }
+
+    public Atividade getAtividade() {
+        return atividade;
+    }
+
+    public void setAtividade(Atividade atividade) {
+        this.atividade = atividade;
     }
 }
