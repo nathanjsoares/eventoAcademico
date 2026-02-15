@@ -9,15 +9,15 @@ import java.time.Instant;
 public class Bloco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant inicio;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant fim;
 
-    @OneToOne
-    @MapsId
+    @ManyToOne
+    @JoinColumn(name = "atividade_id")
     private Atividade atividade;
 
     public Bloco(){
