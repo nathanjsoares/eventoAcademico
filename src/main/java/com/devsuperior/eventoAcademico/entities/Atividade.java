@@ -2,6 +2,9 @@ package com.devsuperior.eventoAcademico.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_atividade")
 public class Atividade {
@@ -20,6 +23,12 @@ public class Atividade {
     @ManyToOne
     @JoinColumn(name = "participante_id")
     private Participante participante;
+
+    @ManyToMany
+    @JoinTable(name = "tb_atividade_participante",
+            joinColumns = @JoinColumn(name = "atividade_id"),
+            inverseJoinColumns = @JoinColumn(name = "participante_id"))
+    private Set<Participante> participantes = new HashSet<>();
 
     @OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)
     private Bloco bloco;
@@ -91,5 +100,9 @@ public class Atividade {
 
     public void setBloco(Bloco bloco) {
         this.bloco = bloco;
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participantes;
     }
 }
